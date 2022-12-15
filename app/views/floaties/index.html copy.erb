@@ -1,24 +1,14 @@
 <%# BANNER %>
-<div class="landing-bck-img">
-
-  <%# NAVBAR %>
-  <div class="navbar-floaties">
-    <%= render "shared/navbar" %>
-  </div>
-
-  <%# SEARCHBAR %>
+<div class="banner">
   <div class="container" >
-
-    <%# TYPRSCRIPT %>
     <h1><strong><span data-controller="typed-js"></span></strong></h1>
 
-    <%# SEARCH FORM %>
     <%= form_with url: floaties_path, method: :get, class: "d-flex" do %>
       <div class="search-form-control form-group  flex-grow-1">
         <%= text_field_tag :query,
           params[:query],
           class: "form-control",
-          placeholder: "Find a floaty in ..."
+          placeholder: "Find a floaty"
         %>
         <%= submit_tag "Search", class: "btn btn-flat"  %>
       </div>
@@ -26,7 +16,13 @@
   </div>
 </div>
 
-<div class="floaties-grid">
+<%# TOGLE MAP/LIST  %>
+<div data-controller="togglemap">
+  <div class="d-flex justify-content-center">
+    <button class="btn btn-flat" data-togglemap-target="button" data-action="togglemap#toggleTargets">Show map</button>
+  </div>
+
+
   <div data-togglemap-target="grid" class="container">
     <div class="card-grid-title">
       <h2>Float around... <%= params[:query] %></h2>
@@ -54,4 +50,14 @@
       <% end %>
     </div>
   </div>
+
+  <%# MAP %>
+  <div class="invisible map-area" data-togglemap-target="map">
+    <%= render "map" %>
+  </div>
 </div>
+
+</div>
+
+<%# FOOTER %>
+<%= render "shared/footer" %>
